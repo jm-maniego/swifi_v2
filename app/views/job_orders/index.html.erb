@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Job Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Client</th>
+      <th>Mode of shipment</th>
+      <th>Service type</th>
+      <th>Services</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @job_orders.each do |job_order| %>
+      <tr>
+        <td><%= job_order.client_id %></td>
+        <td><%= job_order.mode_of_shipment %></td>
+        <td><%= job_order.service_type %></td>
+        <td><%= job_order.services %></td>
+        <td><%= link_to 'Show', job_order %></td>
+        <td><%= link_to 'Edit', edit_job_order_path(job_order) %></td>
+        <td><%= link_to 'Destroy', job_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Job order', new_job_order_path %>

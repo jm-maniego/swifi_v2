@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @job_order.client_name %>
+</p>
+
+<p>
+  <strong>Mode of shipment:</strong>
+  <%= @job_order.mode_of_shipment_display %>
+</p>
+
+<p>
+  <strong>Service type:</strong>
+  <%= @job_order.service_type_display %>
+</p>
+
+<p>
+  <strong>Services:</strong>
+  <%= @job_order.services_display %>
+</p>
+
+<%= link_to 'Edit', edit_job_order_path(@job_order) %> |
+<%= link_to 'Back', job_orders_path %>
