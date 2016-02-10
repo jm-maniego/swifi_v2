@@ -1,11 +1,12 @@
 class JobOrdersController < ApplicationController
-  before_action :init_form, only: [:new, :edit]
+  before_action :set_page, only: [:index]
+  before_action :init_form, only: [:new, :edit, :create, :update]
   before_action :set_job_order, only: [:show, :edit, :update, :destroy]
 
   # GET /job_orders
   # GET /job_orders.json
   def index
-    @job_orders = JobOrder.all
+    @job_orders = JobOrder.includes(:client).order('created_at DESC').paginate(page: @page)
   end
 
   # GET /job_orders/1
@@ -16,6 +17,7 @@ class JobOrdersController < ApplicationController
   # GET /job_orders/new
   def new
     @job_order = JobOrder.new
+    @job_order.build_bill
   end
 
   # GET /job_orders/1/edit
@@ -69,6 +71,10 @@ class JobOrdersController < ApplicationController
       @job_order_services = JobOrder.services
       @clients            = Client.all
     end
+
+    def set_page
+      @page = params[:page] || 1
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_job_order
       @job_order = JobOrder.find(params[:id])
@@ -76,6 +82,6 @@ class JobOrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_order_params
-      params.require(:job_order).permit(:client_id, :mode_of_shipment, :service_type, :services)
+      params.require(:job_order).permit(JobOrder::ACCESSIBLE_ATTRIBUTES, bill_attributes: Bill::ACCESSIBLE_ATTRIBUTES)
     end
 end

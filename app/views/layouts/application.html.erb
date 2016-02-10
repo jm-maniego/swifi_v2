@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SwiFi</title>
+  <title>SWIFI</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
   <nav>
     <div class="nav-wrapper container">
-      <%= link_to "SwiFi", root_path, class: "brand-logo"%>
+      <%= link_to "SWIFI", root_path, class: "brand-logo"%>
       <ul class="right hide-on-med-and-down">
+        <li><%= link_to "Job Orders", job_orders_path %></li>
+        <li><%= link_to "Clients", clients_path %></li>
         <li>
-          <%= link_to "Create JO", new_job_order_url, class: "waves-effect waves-light btn" %>
+          <%= link_to "Create JO", new_job_order_path, class: "waves-effect waves-light btn" %>
         </li>
         <li>
           <form>
@@ -28,6 +31,9 @@
     </div>
   </nav>
   <div class="main container">
+    <header>
+      <h1><%= yield :page_title %></h1>
+    </header>
     <%= yield %>
   </div>
 

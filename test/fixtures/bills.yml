@@ -1,0 +1,47 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  consignee_id: 1
+  shipper_id: 1
+  reference_number: MyString
+  master_reference_number: MyString
+  description: MyText
+  carrier_name: MyString
+  quantity: 1
+  gross_weight: 1.5
+  chargeable_weight: 1.5
+  measurement: 1.5
+  registry_number: MyString
+  port: MyString
+  arrival_date: 2016-02-09
+  estimated_arrival_date: 2016-02-09
+  location: MyString
+  carrier: MyString
+  destination: MyString
+  origin: MyString
+  container_number: MyString
+  invoice_number: MyString
+  invoice_value: 9.99
+
+two:
+  consignee_id: 1
+  shipper_id: 1
+  reference_number: MyString
+  master_reference_number: MyString
+  description: MyText
+  carrier_name: MyString
+  quantity: 1
+  gross_weight: 1.5
+  chargeable_weight: 1.5
+  measurement: 1.5
+  registry_number: MyString
+  port: MyString
+  arrival_date: 2016-02-09
+  estimated_arrival_date: 2016-02-09
+  location: MyString
+  carrier: MyString
+  destination: MyString
+  origin: MyString
+  container_number: MyString
+  invoice_number: MyString
+  invoice_value: 9.99

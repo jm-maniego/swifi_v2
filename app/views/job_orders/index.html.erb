@@ -1,14 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Job Orders</h1>
+<% content_for :page_title do %>
+<span>Job Orders</span>  <a href='<%= "#{new_job_order_path}" %>' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+<% end %>
 
-<table>
+<%= will_paginate(@job_orders) %>
+<table class="highlight">
   <thead>
     <tr>
+      <th>Code</th>
       <th>Client</th>
-      <th>Mode of shipment</th>
-      <th>Service type</th>
-      <th>Services</th>
+      <th>Date created</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +18,9 @@
   <tbody>
     <% @job_orders.each do |job_order| %>
       <tr>
-        <td><%= job_order.client_id %></td>
-        <td><%= job_order.mode_of_shipment %></td>
-        <td><%= job_order.service_type %></td>
-        <td><%= job_order.services %></td>
+        <td><%= job_order.code %></td>
+        <td><%= job_order.client_name %></td>
+        <td><%= job_order.created_at_display %></td>
         <td><%= link_to 'Show', job_order %></td>
         <td><%= link_to 'Edit', edit_job_order_path(job_order) %></td>
         <td><%= link_to 'Destroy', job_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -27,7 +28,4 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Job order', new_job_order_path %>
+<%= will_paginate(@job_orders) %>

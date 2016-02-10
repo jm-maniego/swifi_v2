@@ -1,0 +1,126 @@
+<div class="field row">
+  <div class="input-field col m6 s12">
+    <%= f.select :consignee_id, options_for_select([['Please select', 0, {disabled: "disabled"}], *@clients.map{|client| [client.name, client.id]}], @job_order.bill.consignee_id || 0) %>
+    <label>Consignee</label>
+  </div>
+
+  <div class="input-field col m6 s12">
+    <%= f.select :shipper_id, options_for_select([['Please select', 0, {disabled: "disabled"}], *@clients.map{|client| [client.name, client.id]}], @job_order.bill.shipper_id || 0) %>
+    <label>Shipper</label>
+  </div>
+</div>
+
+<div class="field row">
+  <div class="input-field col s6">
+    <%= f.text_field :reference_number %>
+    <label>BL/AWB No.</label>
+  </div>
+
+  <div class="input-field col s6">
+    <%= f.text_field :master_reference_number %>
+    <label>MBL/MAWB No.</label>
+  </div>
+</div>
+
+<div class="field row">
+  <div class="input-field col m6 s12">
+    <%= f.text_field :carrier %>
+    <label>Carrier (Shipping Lines/Airlines/Co-loader)</label>
+  </div>
+  <div class="input-field col m6 s12">
+    <%= f.text_field :carrier_name %>
+    <label>Carrier Name (Aircraft/Vessel)</label>
+  </div>
+</div>
+
+<div class="field row">
+  <div class="input-field col m6 s12">
+    <%= f.text_field :registry_number %>
+    <label>Registry Number</label>
+  </div>
+
+  <div class="input-field col m6 s12">
+    <%= f.text_field :port %>
+    <label>Port</label>
+  </div>
+</div>
+
+<div class="field row">
+  <div class="input-field col m3 s6">
+    <%= f.number_field :quantity %>
+    <label>Quantity</label>
+  </div>
+
+  <div class="input-field col m3 s6">
+    <%= f.number_field :gross_weight %>
+    <label>Gross Weight</label>
+  </div>
+
+  <div class="input-field col m3 s6">
+    <%= f.number_field :chargeable_weight %>
+    <label>Chargeable Weight (kg)</label>
+  </div>
+
+  <div class="input-field col m3 s6">
+    <%= f.number_field :measurement %>
+    <label>Measurement (cbm)</label>
+  </div>
+</div>
+
+<div class="field row">
+  <div class="input-field col s6">
+    <%= f.date_field :estimated_arrival_date, class: "datepicker" %>
+    <label>Arrival Date (est.)</label>
+  </div>
+
+  <div class="input-field col s6">
+    <%= f.date_field :arrival_date, class: "datepicker" %>
+    <label>Arrival Date</label>
+  </div>
+</div>
+
+<div class="field row">
+  <div class="input-field col m6 s12">
+    <%= f.text_field :location %>
+    <label>Location</label>
+  </div>
+
+  <div class="input-field col m3 s6">
+    <%= f.text_field :destination %>
+    <label>Destination</label>
+  </div>
+
+  <div class="input-field col m3 s6">
+    <%= f.text_field :origin %>
+    <label>Origin</label>
+  </div>
+</div>
+
+<div class="field row">
+  <div class="input-field col s12">
+    <%# TODO: enabled if sea via js %>
+    <%= f.text_field :origin, disabled: !@job_order.origin_is_editable? %>
+    <label>Container Number</label>
+  </div>
+</div>
+
+<div class="field row">
+  <div class="input-field col s6">
+    <%# TODO: enabled if sea via js %>
+    <%= f.text_field :invoice_number %>
+    <label>Invoice Number</label>
+  </div>
+
+  <div class="input-field col s6">
+    <%# TODO: enabled if sea via js %>
+    <%= f.number_field :invoice_value %>
+    <label>Invoice Value</label>
+  </div>
+</div>
+
+<div class="field row">
+  <div class="input-field col s12">
+    <%= f.text_area :description, class: "materialize-textarea" %>
+    <label>Description</label>
+  </div>
+</div>

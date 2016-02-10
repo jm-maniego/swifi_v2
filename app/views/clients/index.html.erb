@@ -1,7 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Clients</h1>
+<% content_for :page_title do %>
+<span>Clients</span>  <a href='<%= "#{new_client_path}" %>' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+<% end %>
 
+<%= will_paginate(@clients) %>
 <table class="highlight">
   <thead>
     <tr>
@@ -25,7 +28,4 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Client', new_client_path %>
+<%= will_paginate(@clients) %>

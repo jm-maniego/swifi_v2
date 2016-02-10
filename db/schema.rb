@@ -11,7 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160207111838) do
+ActiveRecord::Schema.define(version: 20160209074328) do
+
+  create_table "bills", force: :cascade do |t|
+    t.integer  "consignee_id",            limit: 4
+    t.integer  "shipper_id",              limit: 4
+    t.string   "reference_number",        limit: 255
+    t.string   "master_reference_number", limit: 255
+    t.text     "description",             limit: 65535
+    t.string   "carrier_name",            limit: 255
+    t.integer  "quantity",                limit: 4
+    t.float    "gross_weight",            limit: 24
+    t.float    "chargeable_weight",       limit: 24
+    t.float    "measurement",             limit: 24
+    t.string   "registry_number",         limit: 255
+    t.string   "port",                    limit: 255
+    t.date     "arrival_date"
+    t.date     "estimated_arrival_date"
+    t.string   "location",                limit: 255
+    t.string   "carrier",                 limit: 255
+    t.string   "destination",             limit: 255
+    t.string   "origin",                  limit: 255
+    t.string   "container_number",        limit: 255
+    t.string   "invoice_number",          limit: 255
+    t.decimal  "invoice_value",                         precision: 10
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+    t.integer  "job_order_id",            limit: 4,                    null: false
+  end
 
   create_table "clients", force: :cascade do |t|
     t.string   "name",           limit: 255, null: false

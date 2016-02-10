@@ -11,34 +11,80 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <div class="input-field col s12">
-    <%= f.select :client_id, options_from_collection_for_select(@clients, :id, :name) %>
+  <div class="row">
+      <div class="col s12">
+        <ul class="tabs">
+          <li class="tab col s3"><a class="active" href="#service">Service</a></li>
+          <li class="tab col s3"><a href="#details">Details</a></li>
+        </ul>
+      </div>
+      <div id="service" class="col s12">
+        <div class="field row">
+          <div class="input-field col m6 s12">
+            <%= f.select :client_id, options_for_select([['Please select', 0, {disabled: "disabled"}], *@clients.map{|client| [client.name, client.id]}], @job_order.client_id || 0) %>
+            <label>Client</label>
+          </div>
+        </div>
+
+        <div class="field row">
+          <div class="col s12">
+            <p>
+              <%= f.radio_button :mode_of_shipment, JobOrder::MODE_OF_SHIPMENT_SEA, class: "with-gap"%>
+              <label for="job_order_mode_of_shipment_<%=JobOrder::MODE_OF_SHIPMENT_SEA%>" >
+                Sea
+              </label>
+            </p>
+            <p>
+              <%= f.radio_button :mode_of_shipment, JobOrder::MODE_OF_SHIPMENT_AIR, class: "with-gap"%>
+              <label for="job_order_mode_of_shipment_<%=JobOrder::MODE_OF_SHIPMENT_AIR%>" >
+                Air
+              </label>
+            </p>
+          </div>
+        </div>
+
+        <div class="field row">
+          <div class="col s12">
+            <p>
+              <%= f.radio_button :service_type, JobOrder::SERVICE_TYPE_IMPORT, class: "with-gap"%>
+              <label for="job_order_service_type_<%=JobOrder::SERVICE_TYPE_IMPORT%>" >
+                Import
+              </label>
+            </p>
+            <p>
+              <%= f.radio_button :service_type, JobOrder::SERVICE_TYPE_EXPORT, class: "with-gap"%>
+              <label for="job_order_service_type_<%=JobOrder::SERVICE_TYPE_EXPORT%>" >
+                Export
+              </label>
+            </p>
+          </div>
+        </div>
+
+        <div class="field row">
+          <div class="col s12">
+            <p>
+              <%= f.check_box :brokerage, class: "filled-in" %>
+              <label for="job_order_brokerage">Brokerage</label>
+            </p>
+            <p>
+              <%= f.check_box :forwarding, class: "filled-in" %>
+              <label for="job_order_forwarding">Forwarding</label>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="details" class="col s12">
+        <%= f.fields_for :bill, @job_order.bill do |builder| %>
+          <%= render 'bills/bill_fields', f: builder %>
+        <% end %>
+      </div>
     </div>
-  </div>
-
-  <div class="field">
-    <div class="input-field col s12">
-    <%= f.select :mode_of_shipment, options_for_select(@mode_of_shipments) %>
+    <div class="actions row">
+      <div class="col s12">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
     </div>
-  </div>
 
-  <div class="field">
-    <div class="input-field col s12">
-    <%= f.select :service_type, options_for_select(@service_types) %>
-    </div>
-  </div>
-
-  <div class="field">
-    <div class="input-field col s12">
-    <%= select_tag :services, options_for_select(@job_order_services), multiple: true %>
-    </div>
-  </div>
-
-
-  <div class="actions">
-    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-      <i class="material-icons right">send</i>
-    </button>
-  </div>
 <% end %>

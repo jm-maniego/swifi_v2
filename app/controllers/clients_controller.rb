@@ -1,10 +1,11 @@
 class ClientsController < ApplicationController
+  before_action :set_page, only: [:index]
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.all
+    @clients = Client.paginate(page: @page)
   end
 
   # GET /clients/1
@@ -62,6 +63,10 @@ class ClientsController < ApplicationController
   end
 
   private
+    def set_page
+      @page = params[:page] || 1
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_client
       @client = Client.find(params[:id])
