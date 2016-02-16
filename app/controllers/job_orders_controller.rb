@@ -17,6 +17,7 @@ class JobOrdersController < ApplicationController
   # GET /job_orders/new
   def new
     @job_order = JobOrder.new
+    @job_order.build_client
     @job_order.build_bill
   end
 
@@ -28,12 +29,19 @@ class JobOrdersController < ApplicationController
   # POST /job_orders.json
   def create
     @job_order = JobOrder.new(job_order_params)
+    # Hack for accepts_nested_attributes_for :client
+    if @job_order.client.present? && @job_order.client.new_record? && @job_order.client.save!
+      @job_order.client_id = @job_order.client.id
+    end
 
     respond_to do |format|
       if @job_order.save
         format.html { redirect_to @job_order, notice: 'Job order was successfully created.' }
         format.json { render :show, status: :created, location: @job_order }
       else
+        if @job_order.client.blank?
+          @job_order.build_client
+        end
         format.html { render :new }
         format.json { render json: @job_order.errors, status: :unprocessable_entity }
       end
@@ -82,6 +90,10 @@ class JobOrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_order_params
-      params.require(:job_order).permit(JobOrder::ACCESSIBLE_ATTRIBUTES, bill_attributes: Bill::ACCESSIBLE_ATTRIBUTES)
+      params.require(:job_order).permit(
+        JobOrder::ACCESSIBLE_ATTRIBUTES,
+        bill_attributes: Bill::ACCESSIBLE_ATTRIBUTES,
+        client_attributes: Client::ACCESSIBLE_ATTRIBUTES
+        )
     end
 end

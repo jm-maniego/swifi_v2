@@ -9,10 +9,16 @@ class JobOrder < ActiveRecord::Base
   belongs_to :client
   has_one :bill, dependent: :destroy
 
-  accepts_nested_attributes_for :bill
+  accepts_nested_attributes_for :bill, :client
   # Associations - End
 
   # Constants - Start
+  DEFAULT_VALUES = {
+    select_client: true,
+    sea: true,
+    import: true
+  }
+
   NUMBER_CODE_LENGTH = 4
 
   MODE_OF_SHIPMENT = 0
@@ -75,9 +81,17 @@ class JobOrder < ActiveRecord::Base
   scope :for_this_year, -> { for_year(Date.today.year) }
   # Scopes - End
 
+  # attr_accessor - Start
+  attr_accessor :select_client
+  # attr_accessor - End
+
   # Callbacks - Start
   after_create do |job_order|
     generate_number
+  end
+
+  after_initialize do
+    set_default_values
   end
   # Callbacks - End
 
@@ -104,6 +118,10 @@ class JobOrder < ActiveRecord::Base
   #   super(services)
   # end
   # Overrides - End
+
+  def set_default_values
+    self.attributes = DEFAULT_VALUES
+  end
 
   def latest_number
     JobOrder.for_this_year.maximum(:number) || 0
@@ -179,7 +197,7 @@ class JobOrder < ActiveRecord::Base
   end
 
   def origin_should_be_editable
-    if bill.origin.present? && !origin_is_editable?
+    if bill.origin_changed? && !origin_is_editable?
       errors.add(:origin, "is not editable because mode of shipment is not by \"Sea\".")
     end
   end

@@ -16,12 +16,25 @@
         <ul class="tabs">
           <li class="tab col s3"><a class="active" href="#service">Service</a></li>
           <li class="tab col s3"><a href="#details">Details</a></li>
+          <li class="tab col s3"><a href="#expenses">Expenses</a></li>
         </ul>
       </div>
       <div id="service" class="col s12">
         <div class="field row">
+          <div class="col s12">
+            <p>
+              <%= f.radio_button :select_client, true, class: "with-gap"%>
+              <!-- <input name="select_client" type="radio" id="select_client"  class="with-gap"/> -->
+              <label for="job_order_select_client_true" >
+                Select Client
+              </label>
+            </p>
+          </div>
+        </div>
+
+        <div class="field row">
           <div class="input-field col m6 s12">
-            <%= f.select :client_id, options_for_select([['Please select', 0, {disabled: "disabled"}], *@clients.map{|client| [client.name, client.id]}], @job_order.client_id || 0) %>
+            <%= f.select :client_id, options_for_select([['Please select', 0, {disabled: "disabled"}], *@clients.map{|client| [client.name, client.id]}], @job_order.client_id || 0), {}, "data-enabled-for": "job_order_select_client_true" %>
             <label>Client</label>
           </div>
         </div>
@@ -29,14 +42,34 @@
         <div class="field row">
           <div class="col s12">
             <p>
+              <%= f.radio_button :select_client, false, class: "with-gap"%>
+              <label for="job_order_select_client_false" >
+                Add new Client
+              </label>
+            </p>
+          </div>
+        </div>
+
+        <%= f.fields_for :client, @job_order.client do |builder| %>
+          <div class="field row">
+            <div class="input-field col m6 s12">
+              <%= builder.text_field :name, "data-enabled-for": "job_order_select_client_false" %>
+              <label>Client Name</label>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="field row">
+          <div class="col s12">
+            <p>
               <%= f.radio_button :mode_of_shipment, JobOrder::MODE_OF_SHIPMENT_SEA, class: "with-gap"%>
-              <label for="job_order_mode_of_shipment_<%=JobOrder::MODE_OF_SHIPMENT_SEA%>" >
+              <label for="job_order_mode_of_shipment_<%= JobOrder::MODE_OF_SHIPMENT_SEA %>" >
                 Sea
               </label>
             </p>
             <p>
               <%= f.radio_button :mode_of_shipment, JobOrder::MODE_OF_SHIPMENT_AIR, class: "with-gap"%>
-              <label for="job_order_mode_of_shipment_<%=JobOrder::MODE_OF_SHIPMENT_AIR%>" >
+              <label for="job_order_mode_of_shipment_<%= JobOrder::MODE_OF_SHIPMENT_AIR %>" >
                 Air
               </label>
             </p>
@@ -47,13 +80,13 @@
           <div class="col s12">
             <p>
               <%= f.radio_button :service_type, JobOrder::SERVICE_TYPE_IMPORT, class: "with-gap"%>
-              <label for="job_order_service_type_<%=JobOrder::SERVICE_TYPE_IMPORT%>" >
+              <label for="job_order_service_type_<%= JobOrder::SERVICE_TYPE_IMPORT %>" >
                 Import
               </label>
             </p>
             <p>
               <%= f.radio_button :service_type, JobOrder::SERVICE_TYPE_EXPORT, class: "with-gap"%>
-              <label for="job_order_service_type_<%=JobOrder::SERVICE_TYPE_EXPORT%>" >
+              <label for="job_order_service_type_<%= JobOrder::SERVICE_TYPE_EXPORT %>" >
                 Export
               </label>
             </p>

@@ -8,4 +8,12 @@ class Client < ActiveRecord::Base
   # Validations - Start
   validates :name, presence: true
   # Validations - End
+
+  # Constants - Start
+  ACCESSIBLE_ATTRIBUTES = [
+    :name,
+    :contact_person,
+    :contact_name
+  ]
+  # Constants - End
 end
