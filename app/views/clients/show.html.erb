@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @client.name %>
-</p>
+<% content_for :page_title do %>
+<%= @client.name %>
+<% end %>
 
 <p>
   <strong>Contact person:</strong>
