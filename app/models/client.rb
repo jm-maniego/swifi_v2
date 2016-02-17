@@ -1,5 +1,5 @@
 class Client < ActiveRecord::Base
-  self.per_page = 10
+  self.per_page = 100
 
   # Associations - Start
   has_many :job_orders

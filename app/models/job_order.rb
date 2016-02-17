@@ -1,5 +1,5 @@
 class JobOrder < ActiveRecord::Base
-  self.per_page = 10
+  self.per_page = 100
 
   # Mixins - Start
   include Bitfields
