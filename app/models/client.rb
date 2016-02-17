@@ -11,6 +11,7 @@ class Client < ActiveRecord::Base
 
   # Constants - Start
   ACCESSIBLE_ATTRIBUTES = [
+    :id,
     :name,
     :contact_person,
     :contact_name
