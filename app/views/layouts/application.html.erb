@@ -10,32 +10,24 @@
 </head>
 <body>
   <nav>
-    <div class="nav-wrapper container">
-      <%= link_to "SWIFI", root_path, class: "brand-logo"%>
-      <ul class="right hide-on-med-and-down">
-        <li><%= link_to "Job Orders", job_orders_path %></li>
-        <li><%= link_to "Clients", clients_path %></li>
-        <li>
-          <%= link_to "Create JO", new_job_order_path, class: "waves-effect waves-light btn" %>
-        </li>
-        <li>
-          <form>
-            <div class="input-field">
-              <input id="search" type="search" required>
-              <label for="search"><i class="material-icons">search</i></label>
-              <i class="material-icons">close</i>
-            </div>
-          </form>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <div class="main container">
+    <ul id="slide-out" class="side-nav fixed">
+      <li><%= link_to 'Job Orders', job_orders_path %></li>
+      <li><%= link_to 'Clients', clients_path %></li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+
     <header>
-      <h1><%= yield :page_title %></h1>
+      <div class="nav-wrapper container">
+        <%= link_to 'SWIFI', root_url, class: "brand-logo center" %>
+      </div>
     </header>
-    <%= yield %>
-  </div>
+  </nav>
+  <main>
+    <div class="main container">
+      <h1><%= yield :page_title %></h1>
+      <%= yield %>
+    </div>
+  </main>
 
 </body>
 </html>
