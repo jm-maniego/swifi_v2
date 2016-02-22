@@ -1,3 +1,5 @@
-<h1>Editing Client</h1>
+<% content_for :page_title do %>
+<%= @client.name %>
+<% end %>
 
 <%= render 'form' %>

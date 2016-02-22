@@ -1,106 +1,105 @@
 <div class="field row">
   <div class="input-field col m6 s12">
-    <%= f.select :consignee_id, options_for_select([['Please select', 0, {disabled: "disabled"}], *@clients.map{|client| [client.name, client.id]}], @job_order.bill.consignee_id || 0) %>
-    <label>Consignee</label>
+    <%= f.select :shipper_id, options_for_select([['Please select', 0, {disabled: "disabled"}], *@clients.map{|client| [client.name, client.id]}], @job_order.bill.shipper_id || 0) %>
+    <%= f.label :shipper_id %>
   </div>
 
   <div class="input-field col m6 s12">
-    <%= f.select :shipper_id, options_for_select([['Please select', 0, {disabled: "disabled"}], *@clients.map{|client| [client.name, client.id]}], @job_order.bill.shipper_id || 0) %>
-    <label>Shipper</label>
+    <%= f.select :consignee_id, options_for_select([['Please select', 0, {disabled: "disabled"}], *@clients.map{|client| [client.name, client.id]}], @job_order.bill.consignee_id || 0) %>
+    <%= f.label :consignee_id %>
   </div>
 </div>
 
 <div class="field row">
   <div class="input-field col s6">
     <%= f.text_field :reference_number %>
-    <label>BL/AWB No.</label>
+    <%= f.label :reference_number, 'BL/AWB No.' %>
   </div>
 
   <div class="input-field col s6">
     <%= f.text_field :master_reference_number %>
-    <label>MBL/MAWB No.</label>
+    <%= f.label :master_reference_number, 'MBL/MAWB No.' %>
   </div>
 </div>
 
 <div class="field row">
   <div class="input-field col m6 s12">
     <%= f.text_field :carrier %>
-    <label>Carrier (Shipping Lines/Airlines/Co-loader)</label>
+    <%= f.label :carrier, 'Carrier (Shipping Lines/Airlines/Co-loader)' %>
   </div>
   <div class="input-field col m6 s12">
     <%= f.text_field :carrier_name %>
-    <label>Carrier Name (Aircraft/Vessel)</label>
+    <%= f.label :carrier_name, 'Carrier Name (Aircraft/Vessel)' %>
   </div>
 </div>
 
 <div class="field row">
   <div class="input-field col m6 s12">
     <%= f.text_field :registry_number %>
-    <label>Registry Number</label>
+    <%= f.label :registry_number %>
   </div>
 
   <div class="input-field col m6 s12">
     <%= f.text_field :port %>
-    <label>Port</label>
+    <%= f.label :port %>
   </div>
 </div>
 
 <div class="field row">
   <div class="input-field col m3 s6">
-    <%= f.number_field :quantity %>
-    <label>Quantity</label>
+    <%= f.text_field :quantity %>
+    <%= f.label :quantity, "Quantity (No. of pkgs)" %>
   </div>
 
   <div class="input-field col m3 s6">
     <%= f.number_field :gross_weight %>
-    <label>Gross Weight</label>
+    <%= f.label :gross_weight %>
   </div>
 
   <div class="input-field col m3 s6">
     <%= f.number_field :chargeable_weight %>
-    <label>Chargeable Weight (kg)</label>
+    <%= f.label :chargeable_weight, "Chargeable Weight (kg)" %>
   </div>
 
   <div class="input-field col m3 s6">
     <%= f.number_field :measurement %>
-    <label>Measurement (cbm)</label>
+    <%= f.label :measurement, "Measurement (cbm)" %>
   </div>
 </div>
 
 <div class="field row">
   <div class="input-field col s6">
     <%= f.date_field :estimated_arrival_date, class: "datepicker" %>
-    <label>Arrival Date (est.)</label>
+    <%= f.label :estimated_arrival_date, 'Arrival date (est.)' %>
   </div>
 
   <div class="input-field col s6">
     <%= f.date_field :arrival_date, class: "datepicker" %>
-    <label>Arrival Date</label>
+    <%= f.label :arrival_date %>
   </div>
 </div>
 
 <div class="field row">
   <div class="input-field col m6 s12">
     <%= f.text_field :location %>
-    <label>Location</label>
+    <%= f.label :location %>
   </div>
 
   <div class="input-field col m3 s6">
     <%= f.text_field :destination %>
-    <label>Destination</label>
+    <%= f.label :destination %>
   </div>
 
   <div class="input-field col m3 s6">
     <%= f.text_field :origin %>
-    <label>Origin</label>
+    <%= f.label :origin %>
   </div>
 </div>
 
 <div class="field row">
   <div class="input-field col s12">
-    <%# TODO: enabled if sea via js %>
-    <%= f.text_field :origin, disabled: !@job_order.origin_is_editable? %>
-    <label>Container Number</label>
+    <%= f.text_field :container_number, disabled: !@job_order.container_number_is_editable?, "data-enabled-for": "job_order_mode_of_shipment_1" %>
+    <%= f.label :container_number %>
   </div>
 </div>
 
@@ -108,19 +107,19 @@
   <div class="input-field col s6">
     <%# TODO: enabled if sea via js %>
     <%= f.text_field :invoice_number %>
-    <label>Invoice Number</label>
+    <%= f.label :invoice_number %>
   </div>
 
   <div class="input-field col s6">
     <%# TODO: enabled if sea via js %>
     <%= f.number_field :invoice_value %>
-    <label>Invoice Value</label>
+    <%= f.label :invoice_value %>
   </div>
 </div>
 
 <div class="field row">
   <div class="input-field col s12">
     <%= f.text_area :description, class: "materialize-textarea" %>
-    <label>Description</label>
+    <%= f.label :description %>
   </div>
 </div>

@@ -14,9 +14,12 @@ class JobOrder < ActiveRecord::Base
 
   # Constants - Start
   DEFAULT_VALUES = {
-    select_client: true,
     sea: true,
     import: true
+  }
+
+  ATTR_ACCESSOR_DEFAULT_VALUES = {
+    select_client: true
   }
 
   NUMBER_CODE_LENGTH = 4
@@ -45,7 +48,6 @@ class JobOrder < ActiveRecord::Base
     { SERVICES_BROKERAGE => "brokerage", SERVICES_FORWARDING => "forwarding" }
   ]
 
-
   VALID_VALUES = [
     [MODE_OF_SHIPMENT_SEA, MODE_OF_SHIPMENT_AIR],
     [SERVICE_TYPE_IMPORT, SERVICE_TYPE_EXPORT],
@@ -57,7 +59,12 @@ class JobOrder < ActiveRecord::Base
     :mode_of_shipment,
     :service_type,
     :brokerage,
-    :forwarding
+    :forwarding,
+    :select_client
+  ]
+
+  ATTR_ACCESSORS = [
+    :select_client
   ]
   # Constants - End
 
@@ -82,7 +89,7 @@ class JobOrder < ActiveRecord::Base
   # Scopes - End
 
   # attr_accessor - Start
-  attr_accessor :select_client
+  attr_accessor *ATTR_ACCESSORS
   # attr_accessor - End
 
   # Callbacks - Start
@@ -120,7 +127,16 @@ class JobOrder < ActiveRecord::Base
   # Overrides - End
 
   def set_default_values
-    self.attributes = DEFAULT_VALUES
+    set_new_record_default_values
+    set_attr_accessor_default_values
+  end
+
+  def set_new_record_default_values
+    self.assign_attributes DEFAULT_VALUES if new_record?
+  end
+
+  def set_attr_accessor_default_values
+    self.assign_attributes ATTR_ACCESSOR_DEFAULT_VALUES
   end
 
   def latest_number
@@ -138,6 +154,10 @@ class JobOrder < ActiveRecord::Base
 
   def client_name
     client.name
+  end
+
+  def client_name_display
+    client.name_display
   end
 
   def mode_of_shipment_display
@@ -158,7 +178,7 @@ class JobOrder < ActiveRecord::Base
   end
 
   def created_at_code
-    created_at.to_date.strftime('%m-%y')
+    created_at.strftime('%m-%y')
   end
 
   def number_code
@@ -192,19 +212,27 @@ class JobOrder < ActiveRecord::Base
     created_at.strftime("%D")
   end
 
-  def origin_is_editable?
+  def container_number_is_editable?
     new_record? || sea
   end
 
-  def origin_should_be_editable
-    if bill.origin_changed? && !origin_is_editable?
-      errors.add(:origin, "is not editable because mode of shipment is not by \"Sea\".")
-    end
+  def shipper_name_display
+    bill.shipper_name_display
+  end
+
+  def consignee_name_display
+    bill.consignee_name_display
   end
 
   private
 
     def self.for_dropdown(job_order_field_values)
       job_order_field_values.map{|value, name| [name.humanize, value]}
+    end
+
+    def origin_should_be_editable
+      if bill.container_number_changed? && !container_number_is_editable?
+        errors.add(:origin, "is not editable because mode of shipment is not by \"Sea\".")
+      end
     end
 end

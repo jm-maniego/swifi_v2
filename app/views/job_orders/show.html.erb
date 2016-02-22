@@ -1,10 +1,220 @@
-<p id="notice"><%= notice %></p>
-
 <% content_for :page_title do %>
 <%= @job_order.code %>
 <% end %>
-<h3>
-  <%= @job_order.client_name %>
-</h3>
 
-<%= link_to 'Edit', edit_job_order_path(@job_order) %>
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <a class="btn-floating btn-large red" href="<%= edit_job_order_path(@job_order) %>">
+    <i class="large material-icons">mode_edit</i>
+  </a>
+</div>
+
+<div class="row">
+  <div class="col m8 s12">
+    <div class="row">
+      <div class="col m3">
+        <div class="row">
+          <div class="col s12">
+            <strong>MBL/MAWB No. :</strong>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <strong>HBL/HAWB No. :</strong>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <strong>Client :</strong>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <strong>Shipper :</strong>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <strong>Consignee :</strong>
+          </div>
+        </div>
+      </div>
+      <div class="col m9">
+        <div class="row">
+          <div class="col s12">
+            <%= @job_order.bill.master_reference_number %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <%= @job_order.bill.reference_number_display %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <%= @job_order.client_name_display %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <%= @job_order.shipper_name_display %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <%= @job_order.consignee_name_display %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <div class="card-panel">
+          <div class="row">
+            <div class="col m7 s12">
+              <div class="row">
+                <div class="col s6">
+                  <strong>Shipping Lines/Airlines/Co-loader:</strong>
+                </div>
+                <div class="col s6">
+                  <%= @job_order.bill.carrier_display %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s6">
+                  <strong>Aircraft/Vessel:</strong>
+                </div>
+                <div class="col s6">
+                  <%= @job_order.bill.carrier_name_display %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s6">
+                  <strong>Location:</strong>
+                </div>
+                <div class="col s6">
+                  <%= @job_order.bill.location_display %>
+                </div>
+              </div>
+            </div>
+            <div class="col m5 s12">
+              <div class="row">
+                <div class="col s6">
+                  <strong>Destination:</strong>
+                </div>
+                <div class="col s6">
+                  <%= @job_order.bill.destination_display %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s6">
+                  <strong>Origin:</strong>
+                </div>
+                <div class="col s6">
+                  <%= @job_order.bill.origin_display %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col m6 s12">
+        <strong>Description of goods</strong>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col m6 s12">
+        <%= @job_order.bill.description_display %>
+      </div>
+    </div>
+  </div>
+  <div class="col m4 s12">
+    <div class="card-panel">
+      <div class="row">
+        <div class="col s6">
+          <strong>Invoice Number:</strong>
+        </div>
+        <div class="col s6">
+          <%= @job_order.bill.invoice_number_display %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <strong>Invoice Value:</strong>
+        </div>
+        <div class="col s6">
+          <%= @job_order.bill.invoice_value_display %>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col s6">
+          <strong>Container Number:</strong>
+        </div>
+        <div class="col s6">
+          <%= @job_order.bill.container_number_display %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <strong>Registry Number:</strong>
+        </div>
+        <div class="col s6">
+          <%= @job_order.bill.registry_number_display %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <strong>Port:</strong>
+        </div>
+        <div class="col s6">
+          <%= @job_order.bill.port_display %>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col s6">
+          <strong>Quantity:</strong>
+        </div>
+        <div class="col s6">
+          <%= @job_order.bill.quantity_display %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <strong>Gross Weight:</strong>
+        </div>
+        <div class="col s6">
+          <%= @job_order.bill.gross_weight_display %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <strong>Chargeable Weight (kg):</strong>
+        </div>
+        <div class="col s6">
+          <%= @job_order.bill.chargeable_weight_display %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <strong>Measurement (cbm):</strong>
+        </div>
+        <div class="col s6">
+          <%= @job_order.bill.measurement_display %>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col s6">
+          <strong>Arrival Date:</strong>
+        </div>
+        <div class="col s6">
+          <%= @job_order.bill.arrival_date_display %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

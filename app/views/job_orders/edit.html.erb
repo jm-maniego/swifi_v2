@@ -1,3 +1,5 @@
-<h1>Editing Job Order</h1>
+<% content_for :page_title do %>
+<%= @job_order.code %>
+<% end %>
 
 <%= render 'form' %>

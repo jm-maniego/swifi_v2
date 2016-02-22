@@ -11,8 +11,19 @@
 <body>
   <nav>
     <ul id="slide-out" class="side-nav fixed">
-      <li><%= link_to 'Job Orders', job_orders_path %></li>
-      <li><%= link_to 'Clients', clients_path %></li>
+      <li>
+        <div class="container">
+          <form id="search_form" class="z-depth-1">
+            <div class="input-field">
+              <input id="search" type="search" required>
+              <label for="search"><i class="material-icons">search</i></label>
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </div>
+      </li>
+      <%= list_item_to_active 'Job Orders', job_orders_path %>
+      <%= list_item_to_active 'Clients', clients_path %>
     </ul>
     <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 
@@ -24,8 +35,13 @@
   </nav>
   <main>
     <div class="main container">
-      <h1><%= yield :page_title %></h1>
-      <%= yield %>
+      <p id="notice"><%= notice %></p>
+      <h1 class="page-title"><%= yield :page_title %></h1>
+    </div>
+    <div class="content">
+      <div class="container">
+        <%= yield %>
+      </div>
     </div>
   </main>
 

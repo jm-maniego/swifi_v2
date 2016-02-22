@@ -1,8 +1,10 @@
-<p id="notice"><%= notice %></p>
-
 <% content_for :page_title do %>
-<span>Job Orders</span>  <a href='<%= "#{new_job_order_path}" %>' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+Job Orders
 <% end %>
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <a href='<%= "#{new_job_order_path}" %>' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+</div>
 
 <%= will_paginate(@job_orders) %>
 <table class="highlight">

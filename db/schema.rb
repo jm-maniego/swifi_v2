@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160209074328) do
+ActiveRecord::Schema.define(version: 20160222084158) do
 
   create_table "bills", force: :cascade do |t|
     t.integer  "consignee_id",            limit: 4
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20160209074328) do
     t.string   "master_reference_number", limit: 255
     t.text     "description",             limit: 65535
     t.string   "carrier_name",            limit: 255
-    t.integer  "quantity",                limit: 4
+    t.string   "quantity",                limit: 255
     t.float    "gross_weight",            limit: 24
     t.float    "chargeable_weight",       limit: 24
     t.float    "measurement",             limit: 24
@@ -41,11 +41,12 @@ ActiveRecord::Schema.define(version: 20160209074328) do
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string   "name",           limit: 255, null: false
+    t.string   "name",           limit: 255,   null: false
     t.string   "contact_person", limit: 255
     t.string   "contact_number", limit: 255
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.text     "address",        limit: 65535
   end
 
   create_table "job_orders", force: :cascade do |t|
