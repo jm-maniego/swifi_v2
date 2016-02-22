@@ -24,4 +24,8 @@ $(->
       $el.prop('disabled', false)
       init_radio_btns($radio_btns)
       )
+
+  $('ul.tabs li.tab').click((e) ->
+    history.replaceState({}, "tabs", e.target.getAttribute("href"))
+  )
 )
