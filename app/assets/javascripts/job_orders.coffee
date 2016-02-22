@@ -14,10 +14,8 @@ $(->
     $('select').material_select('destroy');
     $('select').material_select();
 
-  $input_enabled_for    = $('[data-enabled-for]')
-  if $input_enabled_for.length > 0
-    input_enabled_for_ids = $input_enabled_for.map((index, el)-> $(el).data('enabled-for'))
-    $radio_btns = $("input[type=radio]##{Array.prototype.join.call(input_enabled_for_ids, ', #')}")
+  $radio_btns = $('[name="job_order[select_client]"], [name="job_order[mode_of_shipment]"')
+  if $radio_btns.length > 0
 
     init_radio_btns($radio_btns)
     $radio_btns.on('change', ->
