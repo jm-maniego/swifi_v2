@@ -16,13 +16,19 @@
  $primary-color: color("light-blue", "darken-3") !default;
  @import "materialize";
 
-html, body {
+html, body, .content {
   min-height: 100%;
   height: 100%;
 }
 
 body {
-  background-color: #FDFDFD;
+  background-color: #F3F3F3;
+}
+
+.content {
+  padding-top: 70px;
+  padding-bottom: 70px;
+  background-color: #F9F9F9;
 }
 
 header, main, footer {
@@ -32,6 +38,18 @@ header, main, footer {
 @media only screen and (max-width : 992px) {
   header, main, footer {
     padding-left: 0;
+  }
+}
+
+#slide-out {
+  padding-top: 40px;
+}
+
+#search_form {
+  line-height: 3rem;
+
+  .material-icons {
+    line-height: 3rem;
   }
 }
 
@@ -51,12 +69,15 @@ nav ul a.hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.page-title {
-  margin: 0;
-  padding: 0;
+h1.page-title {
+  font-size: 2.23rem;
+  margin-top: 20px;
 }
 
 h1 a i {
   vertical-align: bottom;
 }
 
+.details:first-child {
+  text-align: right;
+}
