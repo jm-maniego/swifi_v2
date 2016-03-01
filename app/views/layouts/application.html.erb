@@ -13,7 +13,7 @@
     <ul id="slide-out" class="side-nav fixed">
       <li>
         <div class="container">
-          <form id="search_form" class="z-depth-1">
+          <form id="search_form" class="card">
             <div class="input-field">
               <input id="search" type="search" required>
               <label for="search"><i class="material-icons">search</i></label>
@@ -22,8 +22,25 @@
           </form>
         </div>
       </li>
-      <%= list_item_to_active 'Job Orders', job_orders_path %>
-      <%= list_item_to_active 'Clients', clients_path %>
+      <ul class="collapsible" data-collapsible="expandable">
+        <%= list_item_to_active 'Dashboard', root_url %>
+        <%= list_item_to_active 'Job Orders', job_orders_path, class_active_if_controller: ["job_orders", "expenses"] %>
+        <%= list_item_to_active 'Clients', clients_path, class_active_if_controller: ["clients"] %>
+        <li>
+          <%= active_content_tag :div, class_active_if_controller: [
+              "expense_categories"
+            ], class: "collapsible-header" do %>
+            Expenses
+          <% end %>
+          <div class="collapsible-body">
+            <ul>
+              <%= list_item_to_active 'Categories',expense_categories_path %>
+              <%= list_item_to_active "Default Categories", defaults_expense_categories_path %>
+              <%#= list_item_to_active "Liquidations", li_path %>
+            </ul>
+          </div>
+        </li>
+      </ul>
     </ul>
     <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 
@@ -37,6 +54,7 @@
     <div class="main container">
       <p id="notice"><%= notice %></p>
       <h1 class="page-title"><%= yield :page_title %></h1>
+      <h5 class="page-sub-title"><%= yield :page_sub_title %></h5>
     </div>
     <div class="content">
       <div class="container">

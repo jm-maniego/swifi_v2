@@ -12,11 +12,16 @@ class JobOrdersController < ApplicationController
   # GET /job_orders/1
   # GET /job_orders/1.json
   def show
+    @expense = @job_order.expense
+    if @expense.present?
+      @expense_line_items = @expense.build_expense_line_items
+    end
   end
 
   # GET /job_orders/new
   def new
     @job_order = JobOrder.new
+    @job_order.set_new_record_default_values
     @job_order.build_client
     @job_order.build_bill
   end
@@ -29,6 +34,7 @@ class JobOrdersController < ApplicationController
   # POST /job_orders.json
   def create
     @job_order = JobOrder.new(job_order_params)
+    binding.pry
     # Hack for accepts_nested_attributes_for :client
     if @job_order.client.present? && @job_order.client.new_record? && @job_order.client.save!
       @job_order.client_id = @job_order.client.id

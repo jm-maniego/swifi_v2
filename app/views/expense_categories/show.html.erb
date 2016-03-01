@@ -1,0 +1,9 @@
+<% content_for :page_title do %>
+<%= @expense_category.name %>
+<% end %>
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <a class="btn-floating btn-large red" href="<%= edit_expense_category_path(@expense_category) %>">
+    <i class="large material-icons">mode_edit</i>
+  </a>
+</div>

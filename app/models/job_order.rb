@@ -8,6 +8,7 @@ class JobOrder < ActiveRecord::Base
   # Associations - Start
   belongs_to :client
   has_one :bill, dependent: :destroy
+  has_one :expense, dependent: :destroy
 
   accepts_nested_attributes_for :bill, :client
   # Associations - End
@@ -97,6 +98,8 @@ class JobOrder < ActiveRecord::Base
     generate_number
   end
 
+  before_create :build_expense
+
   after_initialize do
     set_default_values
   end
@@ -115,6 +118,11 @@ class JobOrder < ActiveRecord::Base
     def services
       for_dropdown(JobOrder::FIELD_VALUES[JobOrder::SERVICES])
     end
+
+    # def parse_code_number(code_str)
+    #   # services, number,  = code_str.split('-')
+    #   code_str.split('-')[1].to_i
+    # end
   end
   # Overrides - Start
   # def services=(services)
@@ -127,7 +135,7 @@ class JobOrder < ActiveRecord::Base
   # Overrides - End
 
   def set_default_values
-    set_new_record_default_values
+    # set_new_record_default_values
     set_attr_accessor_default_values
   end
 
@@ -222,6 +230,10 @@ class JobOrder < ActiveRecord::Base
 
   def consignee_name_display
     bill.consignee_name_display
+  end
+
+  def has_expense_line_items?
+    expense.expense_line_items.present?
   end
 
   private

@@ -1,0 +1,21 @@
+<%= form_for(@liquidation) do |f| %>
+  <% if @liquidation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@liquidation.errors.count, "error") %> prohibited this liquidation from being saved:</h2>
+
+      <ul>
+      <% @liquidation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :liquidated_by_name %><br>
+    <%= f.text_field :liquidated_by_name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

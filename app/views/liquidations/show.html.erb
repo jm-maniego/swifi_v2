@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Liquidated by name:</strong>
+  <%= @liquidation.liquidated_by_name %>
+</p>
+
+<%= link_to 'Edit', edit_liquidation_path(@liquidation) %> |
+<%= link_to 'Back', liquidations_path %>

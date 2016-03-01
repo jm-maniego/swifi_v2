@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Liquidations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Liquidated by name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @liquidations.each do |liquidation| %>
+      <tr>
+        <td><%= liquidation.liquidated_by_name %></td>
+        <td><%= link_to 'Show', liquidation %></td>
+        <td><%= link_to 'Edit', edit_liquidation_path(liquidation) %></td>
+        <td><%= link_to 'Destroy', liquidation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Liquidation', new_liquidation_path %>

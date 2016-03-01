@@ -49,6 +49,8 @@ class Bill < ActiveRecord::Base
     _arrival_date = arrival_date || estimated_arrival_date
     if _arrival_date.present?
       _arrival_date.strftime("%D")
+    else
+      '- - -'
     end
   end
 end

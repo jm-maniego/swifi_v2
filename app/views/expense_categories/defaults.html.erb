@@ -1,0 +1,9 @@
+<% content_for :page_title do %>
+Default Expense Categories
+<% end %>
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <a href='<%= "#{defaults_new_expense_categories_path}" %>' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+</div>
+
+<%= render 'index_list' %>

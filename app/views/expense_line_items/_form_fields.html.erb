@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="input-field col s6">
+    <%= f.text_field :name %>
+    <%= f.label :name %>
+  </div>
+  <div class="input-field col s3">
+    <%= f.text_field :reference %>
+    <%= f.label :reference %>
+  </div>
+  <div class="input-field col s3">
+    <%= f.number_field :amount, step: "any", max: 99999999.99 %>
+    <%= f.label :amount %>
+  </div>
+</div>

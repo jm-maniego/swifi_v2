@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222084158) do
+ActiveRecord::Schema.define(version: 20160301140255) do
 
   create_table "bills", force: :cascade do |t|
     t.integer  "consignee_id",            limit: 4
@@ -34,10 +34,10 @@ ActiveRecord::Schema.define(version: 20160222084158) do
     t.string   "origin",                  limit: 255
     t.string   "container_number",        limit: 255
     t.string   "invoice_number",          limit: 255
-    t.decimal  "invoice_value",                         precision: 10
-    t.datetime "created_at",                                           null: false
-    t.datetime "updated_at",                                           null: false
-    t.integer  "job_order_id",            limit: 4,                    null: false
+    t.decimal  "invoice_value",                         precision: 10, scale: 2
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+    t.integer  "job_order_id",            limit: 4,                              null: false
   end
 
   create_table "clients", force: :cascade do |t|
@@ -49,6 +49,28 @@ ActiveRecord::Schema.define(version: 20160222084158) do
     t.text     "address",        limit: 65535
   end
 
+  create_table "expense_categories", force: :cascade do |t|
+    t.string   "name",         limit: 255
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.boolean  "default_flag",             default: false
+  end
+
+  create_table "expense_line_items", force: :cascade do |t|
+    t.integer  "expense_id", limit: 4
+    t.decimal  "amount",                 precision: 10, scale: 2
+    t.string   "reference",  limit: 255
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.string   "name",       limit: 255,                          null: false
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.integer  "job_order_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "job_orders", force: :cascade do |t|
     t.integer  "client_id",        limit: 4,             null: false
     t.integer  "mode_of_shipment", limit: 4, default: 0, null: false
@@ -57,6 +79,20 @@ ActiveRecord::Schema.define(version: 20160222084158) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.integer  "number",           limit: 4, default: 0, null: false
+  end
+
+  create_table "liquidation_line_items", force: :cascade do |t|
+    t.string   "name",                limit: 255
+    t.integer  "expense_category_id", limit: 4
+    t.decimal  "amount",                          precision: 10
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+  end
+
+  create_table "liquidations", force: :cascade do |t|
+    t.string   "liquidated_by_name", limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
 end

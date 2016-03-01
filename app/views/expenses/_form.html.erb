@@ -1,0 +1,26 @@
+<%= form_for([@job_order, @expense]) do |f| %>
+  <% if @expense.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@expense.errors.count, "error") %> prohibited this expense from being saved:</h2>
+
+      <ul>
+      <% @expense.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% @expense.expense_line_items.each do |expense_line_item| %>
+    <%= f.fields_for :expense_line_items, expense_line_item do |builder| %>
+      <%= render 'expense_line_items/form_fields', f: builder, expense_line_item: expense_line_item %>
+    <% end %>
+  <% end %>
+  <div class="actions row">
+      <div class="col s12">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
+<% end %>

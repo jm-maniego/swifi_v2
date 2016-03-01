@@ -1,0 +1,24 @@
+<table class="highlight responsive-table bordered">
+  <thead>
+    <tr>
+      <th data-field="name">Name</th>
+      <th data-field="reference">Reference</th>
+      <th data-field="amount">Amount</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% expense_line_items.each do |expense_line_item| %>
+      <tr>
+        <td><%= expense_line_item.name_display %></td>
+        <td><%= expense_line_item.reference_display %></td>
+        <td><%= number_to_currency expense_line_item.amount %></td>
+      </tr>
+    <% end %>
+    <tr id="expense-total-amount">
+      <td><strong>Total</strong></td>
+      <td></td>
+      <td><strong><%= number_to_currency Expense.total_amount(expense_line_items) %></strong></td>
+    </tr>
+  </tbody>
+</table>

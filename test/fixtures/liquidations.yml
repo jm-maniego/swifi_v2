@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  liquidated_by_name: MyString
+
+two:
+  liquidated_by_name: MyString

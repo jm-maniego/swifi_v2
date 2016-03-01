@@ -1,7 +1,19 @@
 Rails.application.routes.draw do
+
+  resources :liquidations
   root "home#index", path: "dashboard"
   get '/' => redirect("/dashboard")
-  resources :job_orders
+
+  resources :expense_categories do
+    collection do
+      get 'defaults'
+      get 'defaults/new' => 'expense_categories#new_default'
+    end
+  end
+  resources :job_orders do
+    resources :expenses
+  end
+
   resources :clients
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

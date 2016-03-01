@@ -1,0 +1,35 @@
+<%= form_for(@expense_category) do |f| %>
+  <% if @expense_category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@expense_category.errors.count, "error") %> prohibited this expense_category from being saved:</h2>
+
+      <ul>
+      <% @expense_category.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field row">
+    <div class="input-field col m6 s12">
+      <%= f.text_field :name %>
+      <%= f.label :name %>
+    </div>
+  </div>
+  <div class="field row">
+    <div class="col m6 s12">
+      <p>
+        <%= f.check_box :default_flag, class: "filled-in" %>
+        <%= f.label :default_flag, "Default" %>
+      </p>
+    </div>
+  </div>
+  <div class="actions row">
+    <div class="col s12">
+      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </div>
+<% end %>

@@ -23,11 +23,12 @@ html, body, .content {
 
 body {
   background-color: #F3F3F3;
+  // background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAHklEQVQIW2NkQAWSjEh8SSD7OUwAzAFJggTgHJAAAEkuAx5OdRJCAAAAAElFTkSuQmCC");
 }
 
 .content {
-  padding-top: 70px;
-  padding-bottom: 70px;
+  padding-top: 10px;
+  padding-bottom: 40px;
   background-color: #F9F9F9;
 }
 
@@ -43,6 +44,23 @@ header, main, footer {
 
 #slide-out {
   padding-top: 40px;
+  color: black;
+
+  li {
+    line-height: 50px;
+
+    a {
+      line-height: 55px;
+      height: 55px;
+    }
+  }
+
+  .collapsible {
+
+  }
+
+  .collapsible-body > ul {
+  }
 }
 
 #search_form {
@@ -58,7 +76,8 @@ main {
 }
 
 .container {
-  width: 90%;
+  width: 95.3%;
+  max-width: 960px;
 }
 
 #after-brand-logo {
@@ -70,14 +89,43 @@ nav ul a.hover {
 }
 
 h1.page-title {
-  font-size: 2.23rem;
-  margin-top: 20px;
+  font-size: 1.7rem;
+  margin-top: 1.3rem;
+  margin-bottom: 0;
+  padding-bottom: 1.1rem;
+}
+
+h5.page-sub-title {
+  font-size: 1.1rem;
+  color: gray;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 1.1rem;
 }
 
 h1 a i {
   vertical-align: bottom;
 }
 
-.details:first-child {
-  text-align: right;
+#expense-total-amount {
+  background-color: #4db6ac;
+  border-top: 2px solid #009688;
+  border-bottom: none !important;
+}
+
+.details, .card-panel {
+  .col .row:last-child,
+  &> .row:last-child {
+    margin-bottom: 0;
+  }
+}
+
+#expenses-card {
+  background-color: #26a69a;
+  tr {
+    border-bottom: #4db6ac 1px solid;
+  }
+  tr:hover {
+    background-color: #4db6ac;
+  }
 }
