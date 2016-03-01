@@ -34,7 +34,7 @@ class JobOrdersController < ApplicationController
   # POST /job_orders.json
   def create
     @job_order = JobOrder.new(job_order_params)
-    binding.pry
+
     # Hack for accepts_nested_attributes_for :client
     if @job_order.client.present? && @job_order.client.new_record? && @job_order.client.save!
       @job_order.client_id = @job_order.client.id
