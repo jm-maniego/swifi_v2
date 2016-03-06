@@ -75,10 +75,10 @@ main {
   padding-bottom: 120px;
 }
 
-.container {
-  width: 95.3%;
-  max-width: 960px;
-}
+// .container {
+//   width: 95.3%;
+//   max-width: 960px;
+// }
 
 #after-brand-logo {
   margin-left: 140px;
@@ -128,4 +128,8 @@ h1 a i {
   tr:hover {
     background-color: #4db6ac;
   }
+}
+
+.row {
+  margin-bottom: 10px;
 }

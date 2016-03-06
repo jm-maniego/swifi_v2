@@ -12,7 +12,12 @@ class ExpenseLineItem < ActiveRecord::Base
     :id
   ]
 
+  def amount
+    return nil if super && super.zero?
+    super
+  end
+
   def amount=(amount)
-    super(amount.to_f)
+    super amount.to_f
   end
 end

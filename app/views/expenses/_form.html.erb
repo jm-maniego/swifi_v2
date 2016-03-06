@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <% @expense.expense_line_items.each do |expense_line_item| %>
+  <% @expense_line_items.each do |expense_line_item| %>
     <%= f.fields_for :expense_line_items, expense_line_item do |builder| %>
       <%= render 'expense_line_items/form_fields', f: builder, expense_line_item: expense_line_item %>
     <% end %>

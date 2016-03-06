@@ -1,0 +1,2 @@
+class LiquidationImport < Liquidation
+end

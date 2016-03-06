@@ -1,0 +1,2 @@
+class OtherLiquidationLineItem < LiquidationLineItem
+end

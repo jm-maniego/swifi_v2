@@ -1,5 +1,9 @@
-<h1>New Liquidation</h1>
+<% content_for :page_title do %>
+<%= job_order_link(@job_order) %>
+<% end %>
+
+<% content_for :page_sub_title do %>
+<%= name_link(@job_order.client) %>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', liquidations_path %>

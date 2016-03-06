@@ -1,4 +1,6 @@
 class LiquidationsController < ApplicationController
+  before_action :set_job_order, only: [:new, :create, :edit]
+  before_action :set_expense, only: [:new, :create, :edit]
   before_action :set_liquidation, only: [:show, :edit, :update, :destroy]
 
   # GET /liquidations
@@ -14,21 +16,31 @@ class LiquidationsController < ApplicationController
 
   # GET /liquidations/new
   def new
-    @liquidation = Liquidation.new
+    @liquidation = @expense.liquidations.build
+    @expense_categories = ExpenseCategory.all
+    @import_liquidation_line_items = @liquidation.build_import_liquidation_line_items
+    @export_liquidation_line_items = @liquidation.build_export_liquidation_line_items
+    # Other should be dynamically addded via js
+    @other_liquidation_line_items = [@liquidation.other_liquidation_line_items.build]
   end
 
   # GET /liquidations/1/edit
   def edit
+    @expense_categories = ExpenseCategory.all
+    @import_liquidation_line_items = @liquidation.import_liquidation_line_items
+    @export_liquidation_line_items = @liquidation.export_liquidation_line_items
+    # Other should be dynamically addded via js
+    @other_liquidation_line_items = [@liquidation.other_liquidation_line_items.build]
   end
 
   # POST /liquidations
   # POST /liquidations.json
   def create
-    @liquidation = Liquidation.new(liquidation_params)
+    @liquidation = @expense.liquidations.build(liquidation_params)
 
     respond_to do |format|
       if @liquidation.save
-        format.html { redirect_to @liquidation, notice: 'Liquidation was successfully created.' }
+        format.html { redirect_to @job_order, notice: 'Liquidation was successfully created.' }
         format.json { render :show, status: :created, location: @liquidation }
       else
         format.html { render :new }
@@ -63,12 +75,25 @@ class LiquidationsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_job_order
+      @job_order = JobOrder.find(params[:job_order_id])
+    end
+
+    def set_expense
+      @expense = @job_order.expense
+    end
+
     def set_liquidation
-      @liquidation = Liquidation.find(params[:id])
+      @liquidation = @expense.liquidations.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def liquidation_params
-      params.require(:liquidation).permit(:liquidated_by_name)
+      params.require(:liquidation).permit(
+        :liquidated_by_name,
+        import_liquidation_line_items_attributes: LiquidationLineItem::ACCESSIBLE_ATTRIBUTES,
+        export_liquidation_line_items_attributes: LiquidationLineItem::ACCESSIBLE_ATTRIBUTES,
+        other_liquidation_line_items_attributes: LiquidationLineItem::ACCESSIBLE_ATTRIBUTES
+        )
     end
 end

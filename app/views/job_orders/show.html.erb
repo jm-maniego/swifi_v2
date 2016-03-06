@@ -1,7 +1,7 @@
-<% content_for :page_title do %>
+<% content_for:page_title do %>
 <%= job_order_link(@job_order) %>
 <% end %>
-<% content_for :page_sub_title do %>
+<% content_for:page_sub_title do %>
 <%= @job_order.created_at_display %>
 <% end %>
 
@@ -17,7 +17,7 @@
       <div class="col s12">
         <div class="row">
           <div class="col m3 s4">
-            <strong>MBL/MAWB No. :</strong>
+            <strong>MBL/MAWB No.:</strong>
           </div>
           <div class="col m9 s8">
             <%= @job_order.bill.master_reference_number_display %>
@@ -25,7 +25,7 @@
         </div>
         <div class="row">
           <div class="col m3 s4">
-            <strong>HBL/HAWB No. :</strong>
+            <strong>HBL/HAWB No.:</strong>
           </div>
           <div class="col m9 s8">
             <%= @job_order.bill.reference_number_display %>
@@ -33,7 +33,7 @@
         </div>
         <div class="row">
           <div class="col m3 s4">
-            <strong>Client :</strong>
+            <strong>Client:</strong>
           </div>
           <div class="col m9 s8">
             <%= name_link(@job_order.client) %>
@@ -41,7 +41,7 @@
         </div>
         <div class="row">
           <div class="col m3 s4">
-            <strong>Shipper :</strong>
+            <strong>Shipper:</strong>
           </div>
           <div class="col m9 s8">
             <%= name_link(@job_order.bill.shipper) %>
@@ -49,7 +49,7 @@
         </div>
         <div class="row">
           <div class="col m3 s4">
-            <strong>Consignee :</strong>
+            <strong>Consignee:</strong>
           </div>
           <div class="col m9 s8">
             <%= name_link(@job_order.bill.consignee) %>
@@ -64,7 +64,7 @@
             <div class="col m7 s12">
               <div class="row">
                 <div class="col s5">
-                  <strong>Shipping Lines/Airlines/Co-loader :</strong>
+                  <strong>Shipping Lines/Airlines/Co-loader:</strong>
                 </div>
                 <div class="col s7">
                   <%= @job_order.bill.carrier_display %>
@@ -72,7 +72,7 @@
               </div>
               <div class="row">
                 <div class="col s5">
-                  <strong>Aircraft/Vessel :</strong>
+                  <strong>Aircraft/Vessel:</strong>
                 </div>
                 <div class="col s7">
                   <%= @job_order.bill.carrier_name_display %>
@@ -80,7 +80,7 @@
               </div>
               <div class="row">
                 <div class="col s5">
-                  <strong>Location :</strong>
+                  <strong>Location:</strong>
                 </div>
                 <div class="col s7">
                   <%= @job_order.bill.location_display %>
@@ -90,7 +90,7 @@
             <div class="col m5 s12">
               <div class="row">
                 <div class="col s5">
-                  <strong>Destination :</strong>
+                  <strong>Destination:</strong>
                 </div>
                 <div class="col s7">
                   <%= @job_order.bill.destination_display %>
@@ -98,7 +98,7 @@
               </div>
               <div class="row">
                 <div class="col s5">
-                  <strong>Origin :</strong>
+                  <strong>Origin:</strong>
                 </div>
                 <div class="col s7">
                   <%= @job_order.bill.origin_display %>
@@ -129,11 +129,13 @@
               Expenses
               <a class="btn-floating waves-effect waves-light red right" href="<%= edit_job_order_expense_path(@job_order, @expense) %>">
               <i class="medium material-icons">mode_edit</i></a>
-
             </span>
             <p>
               <%= render 'expense_line_items/list', expense: @expense, expense_line_items: @expense_line_items %>
             </p>
+          </div>
+          <div class="card-action">
+          <%= link_to "Add Liquidations", new_job_order_expense_liquidation_path(@job_order, @expense) %>
           </div>
         </div>
       </div>
@@ -146,7 +148,7 @@
     <div class="card-panel">
       <div class="row">
         <div class="col s6">
-          <strong>Invoice Number :</strong>
+          <strong>Invoice Number:</strong>
         </div>
         <div class="col s6">
           <%= @job_order.bill.invoice_number_display %>
@@ -154,7 +156,7 @@
       </div>
       <div class="row">
         <div class="col s6">
-          <strong>Invoice Value :</strong>
+          <strong>Invoice Value:</strong>
         </div>
         <div class="col s6">
           <%= @job_order.bill.invoice_value_display %>
@@ -163,7 +165,7 @@
       <hr>
       <div class="row">
         <div class="col s6">
-          <strong>Container Number :</strong>
+          <strong>Container Number:</strong>
         </div>
         <div class="col s6">
           <%= @job_order.bill.container_number_display %>
@@ -171,7 +173,7 @@
       </div>
       <div class="row">
         <div class="col s6">
-          <strong>Registry Number :</strong>
+          <strong>Registry Number:</strong>
         </div>
         <div class="col s6">
           <%= @job_order.bill.registry_number_display %>
@@ -179,7 +181,7 @@
       </div>
       <div class="row">
         <div class="col s6">
-          <strong>Port :</strong>
+          <strong>Port:</strong>
         </div>
         <div class="col s6">
           <%= @job_order.bill.port_display %>
@@ -188,7 +190,7 @@
       <hr>
       <div class="row">
         <div class="col s6">
-          <strong>Quantity :</strong>
+          <strong>Quantity:</strong>
         </div>
         <div class="col s6">
           <%= @job_order.bill.quantity_display %>
@@ -196,7 +198,7 @@
       </div>
       <div class="row">
         <div class="col s6">
-          <strong>Gross Weight :</strong>
+          <strong>Gross Weight(kg):</strong>
         </div>
         <div class="col s6">
           <%= @job_order.bill.gross_weight_display %>
@@ -204,7 +206,7 @@
       </div>
       <div class="row">
         <div class="col s6">
-          <strong>Chargeable Weight (kg) :</strong>
+          <strong>Chargeable Weight (kg):</strong>
         </div>
         <div class="col s6">
           <%= @job_order.bill.chargeable_weight_display %>
@@ -212,7 +214,7 @@
       </div>
       <div class="row">
         <div class="col s6">
-          <strong>Measurement (cbm) :</strong>
+          <strong>Measurement (cbm):</strong>
         </div>
         <div class="col s6">
           <%= @job_order.bill.measurement_display %>
@@ -221,7 +223,7 @@
       <hr>
       <div class="row">
         <div class="col s6">
-          <strong>Arrival Date :</strong>
+          <strong>Arrival Date:</strong>
         </div>
         <div class="col s6">
           <%= @job_order.bill.arrival_date_display %>

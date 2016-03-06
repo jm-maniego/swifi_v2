@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="input-field col s4">
+    <%= f.text_field :name %>
+    <%= f.label :name %>
+  </div>
+  <div class="input-field col s3">
+    <%= f.select :expense_category_id, options_for_select(
+        [
+          ['Please select', 0, {disabled: "disabled"}],
+          *@expense_categories.map{|ec| [ec.name, ec.id]}
+        ],
+        lqli.expense_category_id || 0
+      ) %>
+    <%= f.label :expense_category_id %>
+  </div>
+  <div class="input-field col s2">
+    <%= f.number_field :amount, step: "any" %>
+    <%= f.label :amount %>
+  </div>
+  <div class="input-field col s3">
+    <%= f.text_field :remarks %>
+    <%= f.label :remarks %>
+  </div>
+</div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160301140255) do
+ActiveRecord::Schema.define(version: 20160302154304) do
 
   create_table "bills", force: :cascade do |t|
     t.integer  "consignee_id",            limit: 4
@@ -84,15 +84,19 @@ ActiveRecord::Schema.define(version: 20160301140255) do
   create_table "liquidation_line_items", force: :cascade do |t|
     t.string   "name",                limit: 255
     t.integer  "expense_category_id", limit: 4
-    t.decimal  "amount",                          precision: 10
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.decimal  "amount",                            precision: 10, scale: 2
+    t.string   "type",                limit: 255
+    t.integer  "liquidation_id",      limit: 4
+    t.text     "remarks",             limit: 65535
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
   end
 
   create_table "liquidations", force: :cascade do |t|
     t.string   "liquidated_by_name", limit: 255
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.integer  "expense_id",         limit: 4
   end
 
 end

@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-  resources :liquidations
   root "home#index", path: "dashboard"
   get '/' => redirect("/dashboard")
 
@@ -11,7 +9,9 @@ Rails.application.routes.draw do
     end
   end
   resources :job_orders do
-    resources :expenses
+    resources :expenses do
+      resources :liquidations
+    end
   end
 
   resources :clients

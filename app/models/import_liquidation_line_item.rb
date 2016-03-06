@@ -1,0 +1,2 @@
+class ImportLiquidationLineItem < LiquidationLineItem
+end
