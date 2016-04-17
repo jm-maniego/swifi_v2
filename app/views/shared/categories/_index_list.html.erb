@@ -1,0 +1,19 @@
+<table class="highlight">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% categories.each do |category| %>
+      <tr>
+        <td><%= name_link(category) %></td>
+        <% klass_name = category.class.name.underscore %>
+        <td><%= link_to 'Edit', send("edit_#{klass_name}_path", category) %></td>
+        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

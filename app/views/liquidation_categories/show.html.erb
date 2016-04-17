@@ -1,0 +1,9 @@
+<% content_for :page_title do %>
+<%= @liquidation_category.name %>
+<% end %>
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <a class="btn-floating btn-large red" href="<%= edit_liquidation_category_path(@liquidation_category) %>">
+    <i class="large material-icons">mode_edit</i>
+  </a>
+</div>

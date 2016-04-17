@@ -1,0 +1,2 @@
+module LiquidationCategoriesHelper
+end

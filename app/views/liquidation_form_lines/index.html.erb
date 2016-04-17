@@ -1,0 +1,23 @@
+<% content_for :page_title do %>
+Liquidation Form
+<% end %>
+
+<table class="highlight">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @liquidation_form_lines.each do |liquidation_form_line| %>
+      <tr>
+        <td><%= liquidation_form_line.name %></td>
+        <td><%= link_to 'Show', liquidation_form_line %></td>
+        <td><%= link_to 'Edit', edit_liquidation_form_line_path(liquidation_form_line) %></td>
+        <td><%= link_to 'Destroy', liquidation_form_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
