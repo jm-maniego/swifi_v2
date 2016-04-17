@@ -1,14 +1,24 @@
 <div class="row">
-  <div class="input-field col s6">
+  <div class="input-field col s4">
     <%= f.text_field :name %>
     <%= f.label :name %>
   </div>
   <div class="input-field col s3">
-    <%= f.text_field :reference %>
-    <%= f.label :reference %>
+    <%= f.select :expense_category_id, options_for_select(
+        [
+          ['Please select', 0, {disabled: "disabled"}],
+          *@expense_categories.map{|ec| [ec.name, ec.id]}
+        ],
+        expense_line_item.expense_category_id || 0
+      ) %>
+    <%= f.label :expense_category_id %>
   </div>
-  <div class="input-field col s3">
+  <div class="input-field col s2">
     <%= f.number_field :amount, step: "any", max: 99999999.99 %>
     <%= f.label :amount %>
+  </div>
+  <div class="input-field col s3">
+    <%= f.text_field :reference %>
+    <%= f.label :reference %>
   </div>
 </div>

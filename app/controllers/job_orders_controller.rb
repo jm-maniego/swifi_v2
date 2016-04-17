@@ -15,6 +15,7 @@ class JobOrdersController < ApplicationController
     @expense = @job_order.expense
     if @expense.present?
       @expense_line_items = @expense.build_expense_line_items
+      @liquidation_summary = @expense.liquidation_summary
     end
   end
 

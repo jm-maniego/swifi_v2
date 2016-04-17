@@ -2,6 +2,7 @@ class ExpenseLineItem < ActiveRecord::Base
   include Displayable
 
   belongs_to :expense
+  belongs_to :expense_category
 
   validates :amount, numericality: true
 
@@ -9,7 +10,8 @@ class ExpenseLineItem < ActiveRecord::Base
     :name,
     :reference,
     :amount,
-    :id
+    :id,
+    :expense_category_id
   ]
 
   def amount

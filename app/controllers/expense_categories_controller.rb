@@ -67,7 +67,7 @@ class ExpenseCategoriesController < ApplicationController
   end
 
   def defaults
-    @expense_categories = ExpenseCategory.where(default_flag: true)
+    @expense_categories = ExpenseCategory.defaults
   end
 
   private

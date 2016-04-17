@@ -2,31 +2,39 @@
 Job Orders
 <% end %>
 
-<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-  <a href='<%= "#{new_job_order_path}" %>' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+<div class="row">
+  <div class="col m9">
+    <%= will_paginate(@job_orders) %>
+      <table class="highlight">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Client</th>
+            <th>Date created</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @job_orders.each do |job_order| %>
+            <tr>
+              <td><%= job_order_link(job_order) %></td>
+              <td><%= name_link(job_order.client) %></td>
+              <td><%= job_order.created_at_display %></td>
+              <td><%= link_to 'Edit', edit_job_order_path(job_order) %></td>
+              <td><%= link_to 'Destroy', job_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= will_paginate(@job_orders) %>
+  </div>
+  <div class="col m3">
+    <ul class="collection with-header">
+      <li class="collection-header"><h5>Action</h5></li>
+      <li>
+        <%= link_to "Add Job Order", new_job_order_path, class: "collection-item" %>
+      </li>
+    </ul>
+  </div>
 </div>
-
-<%= will_paginate(@job_orders) %>
-<table class="highlight">
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Client</th>
-      <th>Date created</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @job_orders.each do |job_order| %>
-      <tr>
-        <td><%= job_order_link(job_order) %></td>
-        <td><%= name_link(job_order.client) %></td>
-        <td><%= job_order.created_at_display %></td>
-        <td><%= link_to 'Edit', edit_job_order_path(job_order) %></td>
-        <td><%= link_to 'Destroy', job_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= will_paginate(@job_orders) %>

@@ -1,11 +1,11 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Liquidations</h1>
+<% content_for :page_title do %>
+<%= job_order_link(@job_order) %>
+<% end %>
 
 <table>
   <thead>
     <tr>
-      <th>Liquidated by name</th>
+      <th>Liquidated by</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,15 +13,9 @@
   <tbody>
     <% @liquidations.each do |liquidation| %>
       <tr>
-        <td><%= liquidation.liquidated_by_name %></td>
-        <td><%= link_to 'Show', liquidation %></td>
-        <td><%= link_to 'Edit', edit_liquidation_path(liquidation) %></td>
-        <td><%= link_to 'Destroy', liquidation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to liquidation.liquidated_by_name, edit_job_order_expense_liquidation_path(@job_order, @expense, liquidation) %></td>
+        <td><%= link_to 'Destroy', [@job_order, @expense, liquidation], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Liquidation', new_liquidation_path %>

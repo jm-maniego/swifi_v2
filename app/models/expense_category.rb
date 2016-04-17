@@ -1,6 +1,8 @@
 class ExpenseCategory < ActiveRecord::Base
   include Displayable
 
+  has_many :expense_line_items
+
   validates :name, presence: true
 
   ACCESSIBLE_ATTRIBUTES = [

@@ -33,8 +33,21 @@
           <div class="collapsible-body">
             <ul>
               <%= list_item_to_active 'Categories',expense_categories_path %>
-              <%= list_item_to_active "Default Categories", defaults_expense_categories_path %>
-              <%#= list_item_to_active "Liquidations", li_path %>
+              <%= list_item_to_active "Expense Form", defaults_expense_categories_path %>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <%= active_content_tag :div, class_active_if_controller: [
+              "liquidation_categories",
+              "liquidation_form_lines"
+            ], class: "collapsible-header" do %>
+            Liquidations
+          <% end %>
+          <div class="collapsible-body">
+            <ul>
+              <%= list_item_to_active 'Categories', liquidation_categories_path %>
+              <%= list_item_to_active "Liquidation Form", liquidation_form_lines_path %>
             </ul>
           </div>
         </li>

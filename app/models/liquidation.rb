@@ -1,61 +1,30 @@
 class Liquidation < ActiveRecord::Base
   belongs_to :expense
+  has_many :liquidation_line_items
   has_many :export_liquidation_line_items, class_name: "ExportLiquidationLineItem", dependent: :destroy
   has_many :import_liquidation_line_items, class_name: "ImportLiquidationLineItem", dependent: :destroy
   has_many :other_liquidation_line_items, class_name: "OtherLiquidationLineItem", dependent: :destroy
 
   accepts_nested_attributes_for :export_liquidation_line_items, :import_liquidation_line_items, reject_if: :line_item_rejectable?
 
-  FORM_FIELDS = {
-    import: [
-      "Processing - Transhipment Permit",
-      "Processing - Re-entry",
-      "Processing - Warehousing Entry",
-      "Processing - Consumption Entry",
-      "Processing - Informal Entry",
-      "Boatnote Forms & Stamps",
-      "Conduction Fee / Customs Guard",
-      "Warehouseman Fee",
-      "Trucking",
-      "Arrastre Charge",
-      "Wharfage Due",
-      "Storage Fee",
-      "Demurrage Charges",
-      "Freight/LCL Charges/Breakbulk/THC",
-      "Duties & Taxes / Bank Charge",
-      "Import Processing Fee (IPF)",
-      "AISL/Container Clearance",
-      "Chassis Rental",
-      "Mission Order",
-      "Assycuda",
-      "Notarial",
-      "Transfer Charges",
-      "CFS/Warehouse Charges"
-    ],
-    export: [
-      "Processing - CI Amendment (Warehouseman)",
-      "Processing - CI Amendment (WAD)",
-      "Processing - Pull-out of orig. CI/CIL/Boatnote",
-      "Processing - ED Amendment",
-      "Processing - Export Entry",
-      "Processing - CI (WAD)",
-      "Conduction Fee / Customs Guard",
-      "Warehouseman Fee",
-      "Arrastre Charge",
-      "Wharfage"
-    ]
-  }
+  validates :liquidated_by_name, presence: true
 
   def build_export_liquidation_line_items
-    FORM_FIELDS[:export].map do |name|
-      export_liquidation_line_items.build(name: name)
+    raise "TODO"
+    except_category_names = liquidation_line_items.pluck(:name)
+    LiquidationCategory.defaults.where.not(name: except_category_names).each do |default_lqc|
+      export_liquidation_line_items.build(name: default_lqc.name)
     end
+    export_liquidation_line_items
   end
 
   def build_import_liquidation_line_items
-    FORM_FIELDS[:import].map do |name|
-      import_liquidation_line_items.build(name: name)
+    raise "TODO"
+    except_category_names = liquidation_line_items.pluck(:name)
+    LiquidationCategory.defaults.where.not(name: except_category_names).each do |default_lqc|
+      import_liquidation_line_items.build(name: default_lqc.name)
     end
+    import_liquidation_line_items
   end
 
   def line_item_rejectable?(li_attributes)

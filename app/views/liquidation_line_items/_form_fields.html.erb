@@ -4,14 +4,14 @@
     <%= f.label :name %>
   </div>
   <div class="input-field col s3">
-    <%= f.select :expense_category_id, options_for_select(
+    <%= f.select :liquidation_category_id, options_for_select(
         [
           ['Please select', 0, {disabled: "disabled"}],
-          *@expense_categories.map{|ec| [ec.name, ec.id]}
+          *@liquidation_categories.map{|ec| [ec.name, ec.id]}
         ],
-        lqli.expense_category_id || 0
+        lqli.liquidation_category_id || 0
       ) %>
-    <%= f.label :expense_category_id %>
+    <%= f.label :liquidation_category_id %>
   </div>
   <div class="input-field col s2">
     <%= f.number_field :amount, step: "any" %>

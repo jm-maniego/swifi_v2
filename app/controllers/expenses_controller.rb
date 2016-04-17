@@ -18,12 +18,14 @@ class ExpensesController < ApplicationController
     @expense = Expense.find_or_create_by(job_order_id: params[:job_order_id])
     @default_categories = ExpenseCategory.defaults
     @expense_line_items = @expense.build_expense_line_items
+    @expense_categories = ExpenseCategory.all
   end
 
   # GET /expenses/1/edit
   def edit
     @default_categories = ExpenseCategory.defaults
     @expense_line_items = @expense.build_expense_line_items
+    @expense_categories = ExpenseCategory.all
   end
 
   # POST /expenses

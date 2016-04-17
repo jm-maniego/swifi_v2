@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users
+  resources :liquidation_form_lines, path: :liquidation_form
   root "home#index", path: "dashboard"
   get '/' => redirect("/dashboard")
 
@@ -8,6 +10,17 @@ Rails.application.routes.draw do
       get 'defaults/new' => 'expense_categories#new_default'
     end
   end
+
+  resources :import_liquidation_categories, controller: :liquidation_categories, type: "LiquidationCategory"
+  resources :export_liquidation_categories, controller: :liquidation_categories
+  resources :liquidation_categories do
+    collection do
+      get 'defaults'
+      get 'defaults/new_import_row' => 'liquidation_categories#new_import_row'
+      get 'defaults/new_export_row' => 'liquidation_categories#new_export_row'
+    end
+  end
+
   resources :job_orders do
     resources :expenses do
       resources :liquidations

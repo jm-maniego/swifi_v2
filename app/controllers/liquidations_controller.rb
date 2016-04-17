@@ -1,12 +1,12 @@
 class LiquidationsController < ApplicationController
-  before_action :set_job_order, only: [:new, :create, :edit]
-  before_action :set_expense, only: [:new, :create, :edit]
+  before_action :set_job_order, only: [:new, :create, :edit, :index, :destroy]
+  before_action :set_expense, only: [:new, :create, :edit, :index, :destroy]
   before_action :set_liquidation, only: [:show, :edit, :update, :destroy]
 
   # GET /liquidations
   # GET /liquidations.json
   def index
-    @liquidations = Liquidation.all
+    @liquidations = @expense.liquidations.where(id: params[:lq_ids])
   end
 
   # GET /liquidations/1
@@ -17,7 +17,7 @@ class LiquidationsController < ApplicationController
   # GET /liquidations/new
   def new
     @liquidation = @expense.liquidations.build
-    @expense_categories = ExpenseCategory.all
+    @liquidation_categories = LiquidationCategory.all
     @import_liquidation_line_items = @liquidation.build_import_liquidation_line_items
     @export_liquidation_line_items = @liquidation.build_export_liquidation_line_items
     # Other should be dynamically addded via js
@@ -26,7 +26,7 @@ class LiquidationsController < ApplicationController
 
   # GET /liquidations/1/edit
   def edit
-    @expense_categories = ExpenseCategory.all
+    @liquidation_categories = LiquidationCategory.all
     @import_liquidation_line_items = @liquidation.import_liquidation_line_items
     @export_liquidation_line_items = @liquidation.export_liquidation_line_items
     # Other should be dynamically addded via js
@@ -68,7 +68,7 @@ class LiquidationsController < ApplicationController
   def destroy
     @liquidation.destroy
     respond_to do |format|
-      format.html { redirect_to liquidations_url, notice: 'Liquidation was successfully destroyed.' }
+      format.html { redirect_to job_order_expense_liquidations_url(@job_order, @expense), notice: 'Liquidation was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

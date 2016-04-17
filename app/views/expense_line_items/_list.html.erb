@@ -15,10 +15,17 @@
         <td><%= number_to_currency expense_line_item.amount %></td>
       </tr>
     <% end %>
+    <% liquidation_summary.each do |lqs| %>
+      <tr class="liquidation_line_item">
+        <td class=""><%= link_to lqs.liquidation_name, job_order_expense_liquidations_path(@job_order, @expense, lq_ids: lqs.lq_ids.split(",")) %></td>
+        <td></td>
+        <td><%= number_to_currency lqs.amount %></td>
+      </tr>
+    <% end %>
     <tr id="expense-total-amount">
       <td><strong>Total</strong></td>
       <td></td>
-      <td><strong><%= number_to_currency Expense.total_amount(expense_line_items) %></strong></td>
+      <td><strong><%= number_to_currency Expense.total_amount([*liquidation_summary, *expense_line_items]) %></strong></td>
     </tr>
   </tbody>
 </table>
