@@ -50,3 +50,5 @@ gem 'bitfields'
 gem 'materialize-sass'
 gem 'squeel'
 gem 'will_paginate'
+
+gem 'devise'
