@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: "users/sessions"
+  }
   resources :liquidation_form_lines, path: :liquidation_form
   root "home#index", path: "dashboard"
   get '/' => redirect("/dashboard")
