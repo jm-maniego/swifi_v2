@@ -1,21 +1,29 @@
-<%= form_for(@liquidation_form_line) do |f| %>
-  <% if @liquidation_form_line.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@liquidation_form_line.errors.count, "error") %> prohibited this liquidation_form_line from being saved:</h2>
+<div class="row">
+  <div class="col s6">
+    <%= form_for(@liquidation_form_line) do |f| %>
+      <% if @liquidation_form_line.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@liquidation_form_line.errors.count, "error") %> prohibited this liquidation_form_line from being saved:</h2>
 
-      <ul>
-      <% @liquidation_form_line.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @liquidation_form_line.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.text_field :name %>
+          <%= f.label :name %>
+        </div>
+      </div>
+      <div class="row">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
