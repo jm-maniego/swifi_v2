@@ -64,7 +64,12 @@ header, main, footer {
 }
 
 #search_form {
+  height: 40px;
   line-height: 3rem;
+
+  .input-field {
+    height: 100%;
+  }
 
   .material-icons {
     line-height: 3rem;
