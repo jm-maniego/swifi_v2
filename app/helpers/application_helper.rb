@@ -53,6 +53,12 @@ module ApplicationHelper
     super(amount, defaults.merge(options))
   end
 
+  def show_action_panel
+    if (action_panel_items  = yield :action_panel_items).present?
+      action_panel_items
+    end
+  end
+
 
 
   # def will_paginate(collection_or_options = nil, options = {})

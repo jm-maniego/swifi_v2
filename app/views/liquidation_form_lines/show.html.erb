@@ -1,9 +1,3 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @liquidation_form_line.name %>
-</p>
-
-<%= link_to 'Edit', edit_liquidation_form_line_path(@liquidation_form_line) %> |
-<%= link_to 'Back', liquidation_form_lines_path %>
+<% content_for :page_title do %>
+<%= @liquidation_form_line.name %>
+<% end %>
